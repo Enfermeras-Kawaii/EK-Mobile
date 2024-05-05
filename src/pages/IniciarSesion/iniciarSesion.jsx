@@ -1,20 +1,18 @@
+// Pages/InicioSesion.js InicioSesion
 // Pages/InicioSesion.js
 import React, { useState } from 'react';
-import { View, Button } from 'react-native';
-import InputCorreo from '../../../components/InputCorreo';
-import InputContrasena from '../../../components/InputContrasena';
+import { View } from 'react-native';
 import { styles } from './styles';
-import TextCorreo from '../../../components/TextCorreo';
 import TextMostarCorreo from '../../../components/TextMostrarCorreo';
 import TextContrasena from '../../../components/TextContrasena';
-import LinkOlvidoContrasena from '../../../components/LinkOlvidoContrasena';
 import Texto from '../../../components/TextNormal/Texto';
 import Titles from '../../../components/Titles/Titles';
 import TextDown from '../../../components/TextDown/TextDown';
 import Input from '../../../components/Input/Input'
 import Link from '../../../components/Link/Link';
+import Boton from '../../../components/Boton/Boton';
 
-const Home = () => {
+const InicioSesion = () => {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
 
@@ -44,17 +42,23 @@ const Home = () => {
 
           </View>
         </View>
-        <Input  value={contrasena} onChangeText={setContrasena} placeholder="Contraseña"> </Input>
+        <Input  value={contrasena} onChangeText={setContrasena} placeholder="Contraseña" secureTextEntry={true}>  </Input>
         <TextDown>Introduce tu contraseña</TextDown>
       </View>
       </View>
+      <Boton onPress={handleInicioSesion} text="Iniciar"></Boton>
       <View style={styles.inputContainer}>
         <View style={styles.contrasenaContainer}>
-          
+        <Texto >¿Aún no tienes una cuenta?</Texto>
+        <View tyle={styles.linkcontainer}>
+        <Link style={styles.linkOlvidoContrasena}>Registrate</Link>
+      
         </View>
-      <Button title="Iniciar Sesión" onPress={handleInicioSesion} />
-      <Texto>¿Aún no tienes una cuenta?</Texto>
-      <Link style={styles.linkOlvidoContrasena}>Registrate</Link>
+        </View>
+      
+      
+      
+      
 
       </View>
       
@@ -64,4 +68,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default InicioSesion;
+
