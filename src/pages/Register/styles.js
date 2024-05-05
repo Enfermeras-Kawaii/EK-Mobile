@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     height: "100%",
+    backgroundColor: "white",
   },
   content: {
     flex: 1,
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   title: {
+    marginTop: 30,
     fontSize: 20,
     fontWeight: "bold",
   },

@@ -80,6 +80,14 @@ function Register() {
                   onChangeText={setEmail}
                 />
               </View>
+              <View style={styles.contentContainer}>
+                <Text>Percepciones de Sueldo</Text>
+                <RegisterInput
+                  type={"numeric"}
+                  value={sueldo}
+                  onChangeText={setSueldo}
+                />
+              </View>
             </View>
             <View style={styles.column}>
               <View style={styles.contentContainer}>
@@ -95,7 +103,15 @@ function Register() {
                 <RegisterCalendar onDateChange={onChangeDate} />
               </View>
               <View style={styles.contentContainer}>
-                <Text>Numero telefonico</Text>
+                <Text>Numero telefonico personal</Text>
+                <RegisterInput
+                  type={"numeric"}
+                  value={telefono}
+                  onChangeText={setTelefono}
+                />
+              </View>
+              <View style={styles.contentContainer}>
+                <Text>Numero telefonico Fijo (Opcional)</Text>
                 <RegisterInput
                   type={"numeric"}
                   value={telefono}
@@ -106,11 +122,12 @@ function Register() {
           </View>
           <View style={styles.footer}>
             <View style={styles.contentContainer}>
-              <Text>Percepciones de Sueldo</Text>
+              <Text>Direccion</Text>
               <RegisterInput
                 type={"numeric"}
-                value={sueldo}
-                onChangeText={setSueldo}
+                value={telefono}
+                onChangeText={setTelefono}
+                Direccion={true}
               />
             </View>
             <View style={styles.butonContainer}>
