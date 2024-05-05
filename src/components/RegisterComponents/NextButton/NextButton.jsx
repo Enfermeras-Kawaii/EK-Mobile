@@ -1,11 +1,15 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./styles";
 
 function NextButton({ text, onPress }) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>{text}</Text>
+      <View style={styles.content}>
+        <Text style={styles.buttonText}>{text}</Text>
+        <MaterialCommunityIcons name="arrow-right" size={20} color="white" />
+      </View>
     </TouchableOpacity>
   );
 }

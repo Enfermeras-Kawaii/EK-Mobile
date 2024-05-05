@@ -8,44 +8,20 @@ import CameraScreen from "./src/pages/Register/CameraScreen/CameraScreen.jsx";
 import ExtraData from "./src/pages/Register/ExtraData/ExtraData.jsx";
 import InicioSesion from "./src/pages/IniciarSesion/iniciarSesion";
 
-
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InicioSesion"
-          component={InicioSesion}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ExtraData"
-          component={ExtraData}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Files"
-          component={Files}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Camera"
-          component={CameraScreen}
-          options={{ headerShown: false }}
-        />
+      <Stack.Navigator
+        screenOptions={{ headerShown: false, statusBarTranslucent: true }}
+      >
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="InicioSesion" component={InicioSesion} />
+        <Stack.Screen name="ExtraData" component={ExtraData} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Files" component={Files} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-

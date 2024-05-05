@@ -5,12 +5,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#F75590",
     borderRadius: 20,
     paddingVertical: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     alignItems: "center",
-    justifyContent: "center",
+  },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
     fontSize: 15,
+    marginRight: 2,
   },
 });
 
