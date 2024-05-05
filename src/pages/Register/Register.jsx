@@ -131,6 +131,8 @@ function Register() {
 
               <View style={{ flexDirection: "column", alignItems: "center" }}>
                 <View style={styles.inputContainer}>
+                  <AntDesign name="clockcircleo" style={{marginLeft:-100 , fontSize: 15, color: "#f36cbc", position: "absolute" }} />
+
                   <TextInput
                     inputMode={"numeric"}
                     value={Disponibilidad.toString()}
@@ -141,12 +143,31 @@ function Register() {
                       borderColor: "#B8B8C8",
                       borderWidth: 1,
                       borderRadius: 5,
+                      width: 60,
+                      height: 35,
+                      padding: 10,
+                      marginLeft:-130
+                    }}
+                  />
+
+                  <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", position: "absolute", right: 8, top: 5 }} />
+                  <TextInput
+                    inputMode={"numeric"}
+                    value={rol}
+                    placeholder="hrs"
+                    onChangeText={setRol}
+                    max="7"
+                    min="1"
+                    style={{
+                      borderColor: "#B8B8C8",
+                      borderWidth: 1,
+                      borderRadius: 5,
                       width: 70,
                       height: 35,
                       padding: 3,
+                      paddingLeft: 5,
                     }}
                   />
-                  <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", position: "absolute", right: 10, top: 8 }} />
                 </View>
                 {diasSeleccionados.map((diasSeleccionadosDeInput, index) => (
                   <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
@@ -155,27 +176,9 @@ function Register() {
                       placeholder={"Días"}
                       onChange={(value) => addDia(value, index)}
                       value={diasSeleccionadosDeInput}
-                      style={{ width: 20, flex: 1, marginRight: 10 }}
                     />
                     <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", marginLeft: 50, position: "absolute" }} />
-                    <TextInput
-                      inputMode={"numeric"}
-                      value={rol}
-                      placeholder="hrs"
-                      onChangeText={setRol}
-                      max="7"
-                      min="1"
-                      style={{
-                        borderColor: "#B8B8C8",
-                        borderWidth: 1,
-                        borderRadius: 5,
-                        width: 70,
-                        height: 35,
-                        padding: 3,
-                        paddingLeft: 5,
-                      }}
-                    />
-                    <AntDesign name="clockcircleo" style={{ paddingLeft: 260, fontSize: 15, color: "#f36cbc", position: "absolute" }} />
+
                   </View>
                 ))}
               </View>
@@ -211,6 +214,7 @@ function Register() {
                 type={"numeric"}
                 value={sueldo}
                 onChangeText={setSueldo}
+                style={{ marginBottom: 10 }}
               />
             </View>
             <View style={styles.butonContainer}>

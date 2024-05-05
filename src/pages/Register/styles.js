@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 50,
+    marginBottom:10
   },
   buttonRow: {
     flexDirection: "row",
@@ -54,12 +55,15 @@ const styles = StyleSheet.create({
     width: "25%",
     padding: 5,
   },
-  inputN:{
-    width:5,
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20, // Ajusta este valor según sea necesario
   },
   footer: {
     alignSelf: "stretch",
     paddingStart: 5,
   },
 });
+
 export default styles;
