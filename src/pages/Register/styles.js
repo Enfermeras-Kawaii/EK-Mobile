@@ -44,11 +44,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 50,
   },
-  butonContainer: {
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  buttonContainer: {
     marginTop: 50,
     width: "25%",
-    alignSelf: "flex-end",
     padding: 5,
+  },
+  inputN:{
+    width:5,
   },
   footer: {
     alignSelf: "stretch",

@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import SideBar from "../../../components/SideBar/SideBar";
 import NextButton from "../../../components/RegisterComponents/NextButton/NextButton";
 import FilesInput from "../../../components/FilesComponents/Files/FilesInput";
-import supabase from "../../../config/initSupabase";
+// import supabase from "../../../config/initSupabase";
 import axios from "axios";
 import styles from "./styles";
 

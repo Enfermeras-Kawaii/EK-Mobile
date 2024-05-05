@@ -23,6 +23,7 @@ function RegisterPicker({
         value={value}
         onChange={onChange}
       />
+      {/* <div style={styles.icono}></div> */}
     </SafeAreaView>
   );
 }

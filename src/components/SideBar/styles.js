@@ -6,9 +6,10 @@ const styles = StyleSheet.create({
   container: {
     width: width * 0.2,
     height: "100%",
-    backgroundColor: "lightgray",
+    backgroundColor: "#8b8dff",
     alignItems: "center",
     justifyContent: "center",
+    // borderTopRightRadius:"50%",
   },
 });
 

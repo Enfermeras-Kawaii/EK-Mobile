@@ -54,5 +54,10 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     paddingStart: 5,
   },
+  imageStyle: {
+    width: 10, // Ajusta el ancho de la imagen según tus necesidades
+    height: 5, // Ajusta la altura de la imagen según tus necesidades
+    resizeMode: "contain", // Ajusta el modo de redimensionamiento según tus necesidades
+  },
 });
 export default styles;

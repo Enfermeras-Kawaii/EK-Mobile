@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
+import { Image } from "react-native";
 import SideBar from "../../components/SideBar/SideBar";
 import RegisterInput from "../../components/RegisterComponents/RegisterInput/RegisterInput";
 import NextButton from "../../components/RegisterComponents/NextButton/NextButton";
 import RegisterPicker from "../../components/RegisterComponents/RegisterPicker/RegisterPicker";
 import RegisterCalendar from "../../components/RegisterComponents/RegisterCalendar/RegisterCalendar";
 import styles from "./styles";
+
 function Register() {
   const navigation = useNavigation();
   const [nombre, setNombre] = useState("");
@@ -18,7 +21,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [sueldo, setSueldo] = useState("");
-
+  const [Disponibilidad, setDisponibilidad] = useState(1);
+  const [diasSeleccionados, setDiasSeleccionados] = useState(Array.from({ length: Disponibilidad }, () => []));
   const data = [
     {
       label: "Cuidador",
@@ -29,9 +33,35 @@ function Register() {
       value: "enfermero",
     },
   ];
+  const dias = [
+    { label: "Lunes", value: 1 },
+    { label: "Martes", value: 2 },
+    { label: "Miércoles", value: 3 },
+    { label: "Jueves", value: 4 },
+    { label: "Viernes", value: 5 },
+    { label: "Sábado", value: 6 },
+    { label: "Domingo", value: 7 }
+  ];
+
   const onChangeDate = (date) => {
     setFechaNacimiento(date);
   };
+
+  const onChangeDispo = (t) => {
+    if (t === "") {
+      setDisponibilidad(0);
+    }
+    else if (t < 1) {
+      setDisponibilidad(1);
+    }
+    else if (t > 7) {
+      setDisponibilidad(7);
+    } else {
+      setDisponibilidad(t);
+    }
+    setDiasSeleccionados(Array.from({ length: Disponibilidad }, () => []));
+  };
+
   const handleNavigate = () => {
     const data = {
       nombre,
@@ -47,11 +77,28 @@ function Register() {
     navigation.navigate("ExtraData", { data });
   };
 
+  const addDia = (nuevoDia, index) => {
+    const nuevosDias = [...diasSeleccionados];
+    nuevosDias[index] = nuevoDia;
+    setDiasSeleccionados(nuevosDias);
+  };
+
   return (
     <View style={styles.container}>
       <SideBar />
       <View style={styles.content}>
         <View style={styles.boxContainer}>
+          <Image
+            source={require("../../../assets/logo.png")}
+            style={{
+              width: 100,
+              height: 100,
+              resizeMode: "contain",
+              marginBottom: 20,
+              alignSelf: "flex-start",
+              position: "absolute"
+            }}
+          />
           <Text style={styles.title}>Registro</Text>
           <View style={styles.secondaryContainer}>
             <View style={styles.column}>
@@ -80,7 +127,60 @@ function Register() {
                   onChangeText={setEmail}
                 />
               </View>
+              <Text>Disponibilidad</Text>
+
+              <View style={{ flexDirection: "column", alignItems: "center" }}>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    inputMode={"numeric"}
+                    value={Disponibilidad.toString()}
+                    onChangeText={onChangeDispo}
+                    max="7"
+                    min="1"
+                    style={{
+                      borderColor: "#B8B8C8",
+                      borderWidth: 1,
+                      borderRadius: 5,
+                      width: 70,
+                      height: 35,
+                      padding: 3,
+                    }}
+                  />
+                  <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", position: "absolute", right: 10, top: 8 }} />
+                </View>
+                {diasSeleccionados.map((diasSeleccionadosDeInput, index) => (
+                  <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
+                    <RegisterPicker
+                      data={dias}
+                      placeholder={"Días"}
+                      onChange={(value) => addDia(value, index)}
+                      value={diasSeleccionadosDeInput}
+                      style={{ width: 20, flex: 1, marginRight: 10 }}
+                    />
+                    <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", marginLeft: 50, position: "absolute" }} />
+                    <TextInput
+                      inputMode={"numeric"}
+                      value={rol}
+                      placeholder="hrs"
+                      onChangeText={setRol}
+                      max="7"
+                      min="1"
+                      style={{
+                        borderColor: "#B8B8C8",
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        width: 70,
+                        height: 35,
+                        padding: 3,
+                        paddingLeft: 5,
+                      }}
+                    />
+                    <AntDesign name="clockcircleo" style={{ paddingLeft: 260, fontSize: 15, color: "#f36cbc", position: "absolute" }} />
+                  </View>
+                ))}
+              </View>
             </View>
+
             <View style={styles.column}>
               <View style={styles.contentContainer}>
                 <Text>Apellido Paterno</Text>
@@ -119,7 +219,7 @@ function Register() {
           </View>
         </View>
       </View>
-    </View>
+    </View >
   );
 }
 
