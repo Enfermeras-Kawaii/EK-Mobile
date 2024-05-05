@@ -2,13 +2,13 @@ import React from "react";
 import { TextInput } from "react-native";
 import styles from "./styles";
 
-function RegisterInput({ value, onChangeText, type }) {
+function RegisterInput({ value, onChangeText, type, Direccion = false }) {
   return (
     <TextInput
       value={value}
       onChangeText={onChangeText}
       inputMode={type}
-      style={styles.input}
+      style={!Direccion ? styles.input : styles.inputDireccion}
     />
   );
 }

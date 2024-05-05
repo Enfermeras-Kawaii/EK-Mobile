@@ -85,7 +85,7 @@ function Register() {
 
   return (
     <View style={styles.container}>
-      <SideBar />
+      <SideBar/>
       <View style={styles.content}>
         <View style={styles.boxContainer}>
           <Image
@@ -127,11 +127,19 @@ function Register() {
                   onChangeText={setEmail}
                 />
               </View>
+              <View style={styles.contentContainer}>
+                <Text>Percepciones de Sueldo</Text>
+                <RegisterInput
+                  type={"numeric"}
+                  value={sueldo}
+                  onChangeText={setSueldo}
+                />
+              </View>
               <Text>Disponibilidad</Text>
 
               <View style={{ flexDirection: "column", alignItems: "center" }}>
                 <View style={styles.inputContainer}>
-                  <AntDesign name="clockcircleo" style={{marginLeft:-100 , fontSize: 15, color: "#f36cbc", position: "absolute" }} />
+                  <AntDesign name="clockcircleo" style={{ marginLeft: -100, fontSize: 15, color: "#f36cbc", position: "absolute" }} />
 
                   <TextInput
                     inputMode={"numeric"}
@@ -146,7 +154,7 @@ function Register() {
                       width: 60,
                       height: 35,
                       padding: 10,
-                      marginLeft:-130
+                      marginLeft: -130
                     }}
                   />
 
@@ -177,11 +185,12 @@ function Register() {
                       onChange={(value) => addDia(value, index)}
                       value={diasSeleccionadosDeInput}
                     />
-                    <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", marginLeft: 50, position: "absolute" }} />
+                    <AntDesign name="calendar" style={{ fontSize: 20, color: "#f36cbc", marginLeft: 80, position: "absolute" }} />
 
                   </View>
                 ))}
               </View>
+
             </View>
 
             <View style={styles.column}>
@@ -198,7 +207,16 @@ function Register() {
                 <RegisterCalendar onDateChange={onChangeDate} />
               </View>
               <View style={styles.contentContainer}>
-                <Text>Numero telefonico</Text>
+                <Text>Numero telefonico personal</Text>
+                <RegisterInput
+                  type={"numeric"}
+                  value={telefono}
+                  onChangeText={setTelefono}
+                />
+              </View>
+
+              <View style={styles.contentContainer}>
+                <Text>Numero telefonico Fijo (Opcional)</Text>
                 <RegisterInput
                   type={"numeric"}
                   value={telefono}
@@ -209,12 +227,12 @@ function Register() {
           </View>
           <View style={styles.footer}>
             <View style={styles.contentContainer}>
-              <Text>Percepciones de Sueldo</Text>
+              <Text>Direccion</Text>
               <RegisterInput
                 type={"numeric"}
-                value={sueldo}
-                onChangeText={setSueldo}
-                style={{ marginBottom: 10 }}
+                value={telefono}
+                onChangeText={setTelefono}
+                Direccion={true}
               />
             </View>
             <View style={styles.butonContainer}>
