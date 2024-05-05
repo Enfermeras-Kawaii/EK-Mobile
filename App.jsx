@@ -6,6 +6,8 @@ import Register from "./src/pages/Register/Register.jsx";
 import Files from "./src/pages/Register/Files/Files.jsx";
 import CameraScreen from "./src/pages/Register/CameraScreen/CameraScreen.jsx";
 import ExtraData from "./src/pages/Register/ExtraData/ExtraData.jsx";
+import InicioSesion from "./src/pages/IniciarSesion/iniciarSesion";
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,6 +17,11 @@ export default function App() {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="InicioSesion"
+          component={InicioSesion}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -41,3 +48,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
