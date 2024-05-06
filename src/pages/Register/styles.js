@@ -3,6 +3,10 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
+  scrollView: {
+    height: "100%",
+    backgroundColor: "white",
+  },
   container: {
     flexDirection: "row",
     height: "100%",
@@ -44,17 +48,30 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   contentContainer: {
-    marginTop: 50,
+    marginTop: 40,
   },
-  butonContainer: {
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  buttonContainer: {
     marginTop: 50,
     width: "25%",
-    alignSelf: "flex-end",
     padding: 5,
+    alignSelf: "flex-end",
   },
   footer: {
     alignSelf: "stretch",
     paddingStart: 5,
   },
+  errorContainer: {
+    minHeight: 20,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+  },
 });
+
 export default styles;

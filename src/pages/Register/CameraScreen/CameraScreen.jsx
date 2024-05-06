@@ -6,6 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { PDFDocument } from "pdf-lib";
 import { Buffer } from "buffer";
 import * as FileSystem from "expo-file-system";
+import Loading from "../../../components/Loading/Loading";
 import styles from "./styles";
 
 const CameraScreen = () => {
@@ -15,8 +16,10 @@ const CameraScreen = () => {
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const input = route.params.input;
+  const provData = route.params?.provData;
 
   useEffect(() => {
     (async () => {
@@ -35,12 +38,13 @@ const CameraScreen = () => {
   const takePicture = async () => {
     if (cameraRef) {
       try {
-        const photo = await cameraRef.takePictureAsync({ quality: 0.5 });
-
+        const photo = await cameraRef.takePictureAsync();
+        setLoading(true);
         const pdfDoc = await PDFDocument.create();
-        const imageBytes = await fetch(photo.uri).then((response) =>
-          response.arrayBuffer()
-        );
+        const imageBase64 = await FileSystem.readAsStringAsync(photo.uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        const imageBytes = Buffer.from(imageBase64, "base64");
         const image = await pdfDoc.embedJpg(imageBytes);
         const page = pdfDoc.addPage([image.width, image.height]);
         page.drawImage(image, {
@@ -59,9 +63,10 @@ const CameraScreen = () => {
             encoding: FileSystem.EncodingType.Base64,
           }
         );
-
+        setLoading(false);
+        setCameraRef(null);
         navigation.navigate("Files", {
-          photo: { uri: photo.uri, input, pdfURI: pdfUri },
+          photo: { uri: photo.uri, input, pdfURI: pdfUri, provData },
         });
       } catch (error) {
         console.log(error);
@@ -83,6 +88,7 @@ const CameraScreen = () => {
 
   return (
     <View style={styles.container}>
+      {loading && <Loading />}
       <Camera
         style={styles.camera}
         type={type}

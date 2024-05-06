@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
   },
+  dateContainer: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
 });
 
 export default styles;

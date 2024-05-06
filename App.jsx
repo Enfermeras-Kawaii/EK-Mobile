@@ -16,9 +16,9 @@ export default function App() {
         screenOptions={{ headerShown: false, statusBarTranslucent: true }}
       >
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="InicioSesion" component={InicioSesion} />
         <Stack.Screen name="ExtraData" component={ExtraData} />
-        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Files" component={Files} />
         <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>

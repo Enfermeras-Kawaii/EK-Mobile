@@ -54,5 +54,17 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     paddingStart: 5,
   },
+  imageStyle: {
+    width: 10,
+    height: 5,
+    resizeMode: "contain",
+  },
+  errorContainer: {
+    minHeight: 20,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+  },
 });
 export default styles;
