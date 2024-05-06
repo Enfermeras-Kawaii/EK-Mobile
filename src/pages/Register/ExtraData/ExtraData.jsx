@@ -1,106 +1,154 @@
-import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  Keyboard,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
 import SideBar from "../../../components/SideBar/SideBar";
 import RegisterInput from "../../../components/RegisterComponents/RegisterInput/RegisterInput";
 import NextButton from "../../../components/RegisterComponents/NextButton/NextButton";
+import BackButton from "../../../components/RegisterComponents/BackButton/BackButton";
 import styles from "../styles";
-import { Image } from "react-native";
 function ExtraData() {
   const navigation = useNavigation();
   const route = useRoute();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors: hookFormErrors },
+  } = useForm();
   const provData = route.params?.data;
 
-  const [experiencias, setExperiencias] = useState("");
-  const [empresa, setEmpresa] = useState("");
-  const [jefe, setJefe] = useState("");
-  const [razon, setRazon] = useState("");
-  const [puesto, setPuesto] = useState(provData.rol);
-
-  const handleNavigate = () => {
+  const handleNavigate = handleSubmit((data) => {
     if (provData) {
-      const detalles_ultimo_trabajo = `${empresa}, ${razon}, ${jefe}, ${puesto}`;
-      provData.experiencias_previas = experiencias;
+      const detalles_ultimo_trabajo = `${data.empresa}, ${data.razon}, ${data.jefe}, ${data.puesto}`;
+      provData.experiencias_previas = data.experiencias;
       provData.detalles_ultimo_trabajo = detalles_ultimo_trabajo;
       navigation.navigate("Files", { provData });
     }
+  });
+  const goBack = () => {
+    navigation.goBack();
   };
-  const goBack=()=>{
-    navigation.goBack(); // Esta función regresa a la página anterior
-  }
+  const handlePress = () => {
+    Keyboard.dismiss();
+  };
 
   return (
-    <View style={styles.container}>
-      <SideBar>
-       
-      </SideBar>
-      <View style={styles.content}>
-        <View style={styles.boxContainer}>
-
-          <Text style={styles.title}>Registro</Text>
-          <View style={styles.secondaryContainer}>
-            <View style={styles.column}>
-              <View style={styles.contentContainer}>
-                <Text>Experiencias Previas</Text>
-                <TextInput
-                  value={experiencias}
-                  onChangeText={setExperiencias}
-                  multiline={true} // Permitir múltiples líneas
-                  numberOfLines={4} // Número de líneas visibles
-                  style={{
-                    width: "80%",
-                    borderWidth: 1,
-                    borderColor: "#ccc",
-                    padding: 10,
-                    marginBottom: 20,
-                  }}
-                />
-              </View>
-              <View style={styles.contentContainer}>
-                <Text>Nombre de la Empresa</Text>
-                <RegisterInput value={empresa} onChangeText={setEmpresa} />
-              </View>
-              <View style={styles.contentContainer}>
-                <Text>Nombre del Anterior Jefe</Text>
-                <RegisterInput value={jefe} onChangeText={setJefe} />
-              </View>
-              <View style={styles.contentContainer}>
-                <Text>¿Por qué ya no trabaja ahí?</Text>
-                <TextInput
-                  value={razon}
-                  onChangeText={setRazon}
-                  multiline={true}
-                  numberOfLines={4}
-                  style={{
-                    width: "80%",
-                    borderWidth: 1,
-                    borderColor: "#ccc",
-                    padding: 10,
-                    marginBottom: 20,
-                  }}
-                />
-              </View>
-              <View style={styles.contentContainer}>
-                <Text>Puesto</Text>
-                <RegisterInput value={puesto} onChangeText={setPuesto} />
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={styles.container}>
+        <SideBar />
+        <View style={styles.content}>
+          <View style={styles.boxContainer}>
+            <Image
+              source={require("../../../../assets/logo.png")}
+              style={{
+                width: 61,
+                height: 71,
+                resizeMode: "contain",
+                marginBottom: 20,
+                alignSelf: "flex-start",
+                position: "absolute",
+              }}
+            />
+            <Text style={styles.title}>Otros Datos de Interes</Text>
+            <View style={styles.secondaryContainer}>
+              <View style={styles.column}>
+                <View style={styles.contentContainer}>
+                  <Text>Experiencias Previas</Text>
+                  <RegisterInput
+                    control={control}
+                    name="experiencias"
+                    multiline={true}
+                    numberOfLines={4}
+                    rules={{ required: true }}
+                  />
+                </View>
+                <View style={styles.errorContainer}>
+                  {hookFormErrors.experiencias && (
+                    <Text style={styles.errorText}>
+                      Las experiencias previas son requeridas
+                    </Text>
+                  )}
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text>Nombre de la Empresa</Text>
+                  <RegisterInput
+                    control={control}
+                    name="empresa"
+                    rules={{ required: true }}
+                  />
+                </View>
+                <View style={styles.errorContainer}>
+                  {hookFormErrors.empresa && (
+                    <Text style={styles.errorText}>
+                      El nombre de la empresa es requerido
+                    </Text>
+                  )}
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text>Nombre del Anterior Jefe</Text>
+                  <RegisterInput
+                    control={control}
+                    name="jefe"
+                    rules={{ required: true }}
+                  />
+                </View>
+                <View style={styles.errorContainer}>
+                  {hookFormErrors.jefe && (
+                    <Text style={styles.errorText}>
+                      El nombre del jefe es requerido
+                    </Text>
+                  )}
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text>¿Por qué ya no trabaja ahí?</Text>
+                  <RegisterInput
+                    control={control}
+                    name="razon"
+                    multiline={true}
+                    numberOfLines={4}
+                    rules={{ required: true }}
+                  />
+                </View>
+                <View style={styles.errorContainer}>
+                  {hookFormErrors.jefe && (
+                    <Text style={styles.errorText}>La razon es requerida</Text>
+                  )}
+                </View>
+                <View style={styles.contentContainer}>
+                  <Text>Puesto</Text>
+                  <RegisterInput
+                    control={control}
+                    name="puesto"
+                    rules={{ required: true }}
+                  />
+                </View>
+                <View style={styles.errorContainer}>
+                  {hookFormErrors.jefe && (
+                    <Text style={styles.errorText}>El puesto es requerido</Text>
+                  )}
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.footer}>
-            <View style={styles.buttonRow}>
-              <View style={styles.buttonContainer}>
-                <NextButton text="Atrás" onPress={goBack} />
+            <View style={styles.footer}>
+              <View style={styles.buttonRow}>
+                <View style={styles.buttonContainer}>
+                  <BackButton text="Atras" onPress={goBack} />
+                </View>
+                <View style={styles.buttonContainer}>
+                  <NextButton text="Siguiente" onPress={handleNavigate} />
+                </View>
               </View>
-              <View style={styles.buttonContainer}>
-                <NextButton text="Siguiente" onPress={handleNavigate} />
-
-              </View>
-
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

@@ -44,15 +44,20 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 20,
   },
-  butonContainer: {
+  buttonContainer: {
     marginTop: 50,
     width: "25%",
-    alignSelf: "flex-end",
     padding: 5,
+    alignSelf: "flex-end",
   },
   footer: {
     alignSelf: "stretch",
     paddingStart: 5,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
 });
 export default styles;

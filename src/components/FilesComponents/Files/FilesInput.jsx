@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import CameraScreen from "../../../pages/Register/CameraScreen/CameraScreen";
+import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 
-function FilesInput({ imageUri }) {
+function FilesInput({ imageUri, onPress }) {
   return (
     <View>
       <View>
-        <Image source={{ uri: imageUri }} style={styles.image} />
+        {!imageUri && (
+          <TouchableOpacity style={styles.views} onPress={onPress}>
+            <AntDesign name="camerao" size={30} color="#F75590" />
+            <Text style={styles.text}>Presione para sacar una foto</Text>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Seleccionar imagen</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
       </View>
     </View>
   );
